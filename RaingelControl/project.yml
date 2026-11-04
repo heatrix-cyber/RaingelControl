@@ -1,0 +1,39 @@
+name: RaingelControl
+options:
+  bundleIdPrefix: com.raingel
+  deploymentTarget:
+    iOS: "18.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: 5.0
+    IPHONEOS_DEPLOYMENT_TARGET: "18.0"
+    TARGETED_DEVICE_FAMILY: "1,2"
+targets:
+  RaingelControl:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources/RaingelControl
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.raingel.control
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription: "Connect to and control your Raingel RGB lamp."
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+    dependencies:
+      - target: RaingelControlWidget
+        embed: true
+  RaingelControlWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Sources/RaingelControlWidget
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.raingel.control.widget
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription: "Connect to and control your Raingel RGB lamp."
+        INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier: com.apple.widgetkit-extension
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SKIP_INSTALL: YES
